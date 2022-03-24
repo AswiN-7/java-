@@ -1,0 +1,814 @@
+﻿1-linear_search
+
+import java.util.*;
+class linear_binary
+ {
+   public static void main(String args[]) 
+  { 
+     Scanner s=new Scanner(System.in);
+    int i,num,choice,key,result=0;
+    
+         System.out.print("enter how many numbers your are going to give : ");
+         num=s.nextInt();
+
+               int[]array=new int[num];
+                input(array,num,s);
+             System.out.print("1-linear search\n2-binary search\nenter choice : ");
+             choice=s.nextInt();
+         System.out.print("enter key : ");
+         key=s.nextInt();
+    if(choice==1)
+        result=linear_search(array,num,key);
+    else if(choice==2)
+      {
+       sort(array,num);
+       result=binary_search(array,num,key);
+      }
+     display(array,num,result);
+   
+  }
+   static void input(int array[],int num,Scanner s)
+    {
+       int i;
+       for(i=0;i<num;i++)
+     {
+      System.out.print("enter number "+(i+1)+" : ");
+      array[i]=s.nextInt();
+     }
+         
+    }
+  static int linear_search(int array[],int num,int key)
+  {
+    int i;
+    for(i=0;i<num;i++)
+      { if(key==array[i])
+          return i;
+     }
+    return -1;
+  }
+  static void display(int array[],int num,int result)
+    {
+      int i;
+      
+       for(i=0;i<num;i++)
+           System.out.println(" number "+(i+1)+" : "+(array[i]));
+       if(result==-1)
+             System.out.println("number is not there in the given list of numbers ");
+        else
+             System.out.println("position of the given number is :"+(result+1));   
+     
+    }
+  static void sort(int array[],int num)
+    { 
+      int i,j,temp;
+      for(i=0;i<num;i++)
+         for(j=i+1;j<num;j++)
+          { 
+            if(array[i]>array[j])
+             {
+              temp=array[i];
+              array[i]=array[j];
+              array[j]=temp;
+             
+             }
+          }
+      
+    }
+   static int binary_search(int array[],int num,int key)
+      {
+        int i,j,middle;
+          middle=num/2;
+        if(key<array[0])
+          return -1;
+        else if(key>array[num-1])
+           return -1;
+        else if(key==array[middle])
+            return middle;
+         else if(key<array[middle])
+            { 
+             for(i=0;i<middle;i++)
+                {
+                   if(key==array[i])
+                      return i;
+                }
+               return -1;
+            } 
+          else if(key>array[middle])
+            { 
+             for(i=middle+1;i<num;i++)
+                {
+                   if(key==array[i])
+                      return i;
+                }
+               return -1;
+            } 
+           else
+             return -1;
+      }
+    
+}
+
+/*
+ SAMPLE I/O :
+
+aswin-HP-Pavilion-Laptop-15-cs2xxx:~/Desktop/java/programs/1b$ java linear_binary
+enter how many numbers your are going to give : 5
+enter number 1 : 1
+enter number 2 : 2
+enter number 3 : 3
+enter number 4 : 5
+enter number 5 : 7
+1-linear search
+2-binary search
+enter choice : 1
+enter key : 3
+ number 1 : 1
+ number 2 : 2
+ number 3 : 3
+ number 4 : 5
+ number 5 : 7
+position of the given number is :3
+aswin@aswin-HP-Pavilion-Laptop-15-cs2xxx:~/Desktop/java/programs/1b$ java linear_binary
+enter how many numbers your are going to give : 5
+enter number 1 : 4
+enter number 2 : 8
+enter number 3 : 9
+enter number 4 : 0
+enter number 5 : 4
+1-linear search
+2-binary search
+enter choice : 2
+enter key : 0
+ number 1 : 0
+ number 2 : 4
+ number 3 : 4
+ number 4 : 8
+ number 5 : 9
+position of the given number is :1
+
+
+
+  
+*/
+
+2-matrix
+
+
+import java.util.*;
+class matrix
+{
+   public static void main(String args[])
+    {
+    Scanner s=new Scanner(System.in);
+    int choice,row,column,row2,column2;
+    int[][] mat1=new int[5][5];
+    int[][] mat2=new int[5][5];
+    int[][] mat3=new int[5][5];
+    mat3[0][0]=0;
+    System.out.println("matrix addition-1\nmatrix subraction-2\nmatrix multiplication-3 ");
+    System.out.print("enter choice: ");
+     choice=s.nextInt(); 
+    System.out.print("enter row : ");
+    row=s.nextInt();
+    System.out.print("enter column : ");
+    column=s.nextInt();
+    System.out.println("for matrix 1 : ");
+    input(row,column,mat1,s);
+     if(choice==1||choice==2)
+     {
+  
+    
+       System.out.println("for matrix 2 : ");
+    input(row,column,mat2,s);
+    if(choice==1)
+      add(mat1,mat2,mat3,row,column);
+    else if(choice==2)
+     sub(mat1,mat2,mat3,row,column);
+     output(row,column,mat3);
+    }
+   else if(choice==3)
+    {  while(1>0)
+      {
+        System.out.println("for matrix 2 : ");
+        System.out.print("enter row : ");
+        row2=s.nextInt();
+        System.out.print("enter coulmn : ");
+        column2=s.nextInt();
+        if(column!=row2)
+          System.out.println("first matrix column is not matched with second row so enter correctly ");
+        else
+          break;
+           
+      }
+      input(row2,column2,mat2,s);
+      multiplication(mat1,mat2,mat3,row,column,column2);
+      output(row,column2,mat3);
+      
+   }
+    else
+      System.out.println("enter correct choice");
+    
+    
+
+     }
+static void input(int row,int column,int mat[][],Scanner s)
+    {
+      int i,j;
+      for(i=0;i<row;i++)
+        for(j=0;j<column;j++)
+          {
+            System.out.print("enter ["+i+"]["+j+"]  :");
+            mat[i][j]=s.nextInt();
+          }
+    }
+
+ 
+static void output(int row,int column,int mat[][])
+   {
+    int i,j;
+    for(i=0;i<row;i++)
+    {
+     for(j=0;j<column;j++)
+       {
+        System.out.print(mat[i][j]+"  "   );
+       }
+        System.out.print("\n");
+    }
+
+   }
+static void add(int mat1[][],int mat2[][],int mat3[][],int row,int column)
+   {int i,j;
+    for(i=0;i<row;i++)
+     {
+      for(j=0;j<column;j++)
+        { 
+          mat3[i][j]=mat1[i][j]+mat2[i][j];
+        }
+    
+     }
+   }
+static void sub(int mat1[][],int mat2[][],int mat3[][],int row,int column)
+   {int i,j;
+    for(i=0;i<row;i++)
+     {
+      for(j=0;j<column;j++)
+        { 
+          mat3[i][j]=mat1[i][j]-mat2[i][j];
+        }
+    
+     }
+   }
+   static void multiplication(int mat1[][],int mat2[][],int mat3[][],int row,int column,int column2)
+   {int i,j,k;
+    for(i=0;i<row;i++)
+     {
+      for(j=0;j<column2;j++)
+        for(k=0;k<column;k++)
+        { 
+          mat3[i][j]+=mat1[i][k]*mat2[k][j];
+        }
+    
+     }
+   }
+
+
+}
+
+/*
+SAMPLE I/O:
+aswin@aswin-HP-Pavilion-Laptop-15-cs2xxx:~/Desktop/java/programs/1b$ java matrix
+matrix addition-1
+matrix subraction-2
+matrix multiplication-3 
+enter choice: 3
+enter row : 2
+enter column : 3
+for matrix 1 : 
+enter [0][0]  :1
+enter [0][1]  :2
+enter [0][2]  :3
+enter [1][0]  :4
+enter [1][1]  :5
+enter [1][2]  :6
+for matrix 2 : 
+enter row : 3
+enter coulmn : 3
+enter [0][0]  :1
+enter [0][1]  :2
+enter [0][2]  :3
+enter [1][0]  :4
+enter [1][1]  :5
+enter [1][2]  :6
+enter [2][0]  :7
+enter [2][1]  :8
+enter [2][2]  :9
+30  36  42  
+66  81  96  
+
+
+ 
+*/
+
+3-electiricity bill
+import java.util.*;
+public class bill
+{
+     
+	public static void main(String[] args) {
+          double total;
+	    Scanner s= new Scanner(System.in);
+		System.out.print("enter id :");
+		detials.consumer_no=s.nextInt();
+		System.out.print("enter name : ");
+		detials.consumer_name=s.next();
+		System.out.print("enter previous month reading :");
+		detials.pmr=s.nextInt();
+		System.out.print("enter current month reading :");
+		detials.cmr=s.nextInt();
+		System.out.print("domestic - 1\ncommercial -2\nenter correct type connection  :");
+		detials.tyc=s.nextInt();
+		total=unit_claculator();
+           output(total);
+	}
+	static double unit_claculator()
+	{
+	    int unit;
+	    double money,total;
+	      unit=detials.cmr-detials.pmr;
+	      
+	    if(detials.tyc==1)
+	    {
+	        if(unit<0 )
+	         money= 0;
+	       else if(unit>0&&unit<=100)
+	          money= 1;
+	       else if(unit>100&&unit<=200)
+	           money= 2.50;
+	       else if(unit>200&&unit<=500)
+	          money=4;
+	          else
+	            money=6;
+       total=money*unit;
+       
+	    }
+      else 
+      { if(unit<0 )
+	         money= 0;
+	       else if(unit>0&&unit<=100)
+	          money= 2;
+	       else if(unit>100&&unit<=200)
+	           money=4.50;
+	       else if(unit>200&&unit<=500)
+	          money=6;
+	          else
+	            money=7;
+       total=money*unit;
+       
+	    }
+      return total;
+	}
+	static void output(double total)
+	 {
+	     	System.out.println("Name of the consumer : "+detials.consumer_name);
+	     	System.out.println("Consumer id          : "+detials.consumer_no);
+	     	if(detials.tyc==1)
+	     			System.out.println("type of connection     : demestic");
+	     	else
+	               System.out.println("type of connection     : commercial");
+	         System.out.println("total amount : "+total);
+	 }
+}
+ class detials
+{
+  static  int consumer_no;
+ static   String consumer_name;
+  static  int pmr;
+  static  int cmr;
+  static  int tyc;
+}
+
+/*SAMPLE I/O:
+aswin@aswin-HP-Pavilion-Laptop-15-cs2xxx:~/Desktop/java/programs/1b$ java bill
+enter id :1096
+enter name : aswin
+enter previous month reading :1000
+enter current month reading :1300
+domestic - 1
+commercial -2
+enter correct type connection  :2
+Name of the consumer : aswin
+Consumer id          : 1096
+type of connection     : commercial
+total amount : 1800.0
+
+*/
+
+4-student
+
+
+import java.util.*;
+
+class student_details
+{
+  public static void main(String args[])
+    {  Scanner inp=new Scanner(System.in);
+       System.out.print("how many students you are going to give : "); 
+       int size,i,search_id,deptresult,idresult;
+       String search_dept;
+       size=inp.nextInt();
+       student[]sarray=new student[size];
+
+       for(i=0;i<size;i++)
+
+        {
+           sarray[i]=new student();
+           sarray[i].input(i);
+           sarray[i].grade();
+   
+        }
+       System.out.print(" enter student id to search in the list : "); 
+        search_id=inp.nextInt();
+       System.out.print("enter student dept to search in the list : ");
+        search_dept=inp.next();
+        deptresult=search(search_dept,size,sarray);
+         if(deptresult==-1)
+            System.out.println("no entered dept not in the list");
+         else
+            System.out.print("yes dept is present in the list and its position is"+(deptresult+1));
+        idresult=search(search_id,size,sarray);
+           if(idresult==-1)
+            System.out.println("no entered dept not in the list");
+         else
+            System.out.print("yes dept is present in the list and its position is"+(deptresult+1));
+
+
+
+      
+for(i=0;i<size;i++)
+      sarray[i].display(size);
+}
+
+  static int search(String search_dept,int size,student []sarray)
+     { int i;
+       for(i=0;i<size;i++)
+        {
+         if((search_dept.compareTo(sarray[i].dept))==0)
+           return i;
+        }
+      return -1;
+     }
+     
+   static int search(int search_id,int size,student []sarray)
+     { int i;
+       for(i=0;i<size;i++)
+        {
+         if(search_id==sarray[i].id)
+           return i;
+        }
+      return -1;
+     }
+    
+       
+
+}
+class student
+{
+  Scanner s=new Scanner(System.in);
+  int id;
+ String name;
+ String dept;
+ int []marks=new int[3];
+ String grade;
+ int total=0;
+ float average;
+ void input(int i)
+{
+ int j;
+ 
+   
+    System.out.print("enter name of student "+(i+1)+" : ");
+    name=s.nextLine();
+    System.out.print("enter department  : ");
+    dept=s.next();
+    System.out.print("enter id of "+name+" : ");
+    id=s.nextInt();
+    System.out.println("enter marks :");
+    for(j=0;j<3;j++)
+      {
+     System.out.print("enter marks "+(j+1)+": ");
+    marks[j]=s.nextInt();
+    total+=marks[j];
+       }
+   
+
+}
+
+
+void grade()
+    {
+      average=total/30;
+      if(average>=9)
+        grade="O";
+       else if(average>=8&&average<9)
+        grade="A+";
+      else if(average>=7&&average<8)
+           grade="A";
+      else if(average>=6&&average<7)
+           grade="B+";
+       else if(average>=4&&average<6)
+           grade="B";
+       else
+         grade="FAIL";
+        
+    }
+  
+  
+  void display(int size)
+    {
+      int j;
+    
+         System.out.println("	NAME : "+name);
+         System.out.println("	ID   : "+id);
+         System.out.println("	DEPT : "+dept);
+         System.out.print("	MARKS: ");
+         for(j=0;j<3;j++)
+           System.out.print(marks[j]+"  ");
+         System.out.println("	GRADE: "+grade);
+      
+      
+    }
+    
+}
+
+/* SAMPLE I/O:
+
+C:\Users\Shannupriya\Desktop\java>javac student_details.java
+
+C:\Users\Shannupriya\Desktop\java>java student_details
+how many students you are going to give : 4
+enter name of student 1 : vijay
+enter department  : it
+enter id of vijay : 121
+enter marks :
+enter marks 1: 89
+enter marks 2: 87
+enter marks 3: 78
+enter name of student 2 : aswin
+enter department  : cse
+enter id of aswin : 027
+enter marks :
+enter marks 1: 78
+enter marks 2: 98
+enter marks 3: 87
+enter name of student 3 : arthick
+enter department  : 87
+enter id of arthick : 89
+enter marks :
+enter marks 1: 87
+enter marks 2: 76
+enter marks 3: 89
+enter name of student 4 : praveen
+enter department  : cse
+enter id of praveen : 73
+enter marks :
+enter marks 1: 87
+enter marks 2: 89
+enter marks 3: 87
+ enter student id to search in the list : 27
+enter student dept to search in the list : cse
+yes dept is present in the list and its position is2yes dept is present in the l
+ist and its position is2        NAME : vijay
+        ID   : 121
+        DEPT : it
+        MARKS: 89  87  78       GRADE: A+
+        NAME : aswin
+        ID   : 27
+        DEPT : cse
+        MARKS: 78  98  87       GRADE: A+
+        NAME : arthick
+        ID   : 89
+        DEPT : 87
+        MARKS: 87  76  89       GRADE: A+
+        NAME : praveen
+        ID   : 73
+        DEPT : cse
+        MARKS: 87  89  87       GRADE: A+
+
+*/
+
+5-employee
+
+import java.util.*;
+class employee
+{
+ String name;
+ int id,yoe,designation;
+ double basic_pay,da,hra,lic,pf,working_hrs,hourly_wages,deductions,gross_salary,net_salary;
+    
+ void grosspay()
+  {
+  if(designation==1)
+    { da=2000;
+      hra=1000;
+      gross_salary=working_hrs*hourly_wages+da+hra;
+       if(lic==0)
+         deductions=500;
+       else
+          deductions=lic+500;
+    
+          
+    }
+   else if(designation==2)
+    {
+      da=basic_pay*0.4;
+      hra=basic_pay*0.1;
+      pf=basic_pay*0.8;
+    gross_salary=basic_pay+da+hra;
+    if(lic==0)
+         deductions=pf;
+       else
+          deductions=lic+pf;
+  
+    
+   }
+   
+  else if(designation==3)
+    {
+      da=basic_pay*0.3;
+      hra=basic_pay*0.1;
+      pf=basic_pay*0.8;
+      gross_salary=basic_pay+da+hra;
+    if(lic==0)
+         deductions=pf;
+       else
+          deductions=lic+pf;
+  
+   
+    }
+ }
+ void netpay()
+   {
+    net_salary=gross_salary-deductions;
+   }
+  
+}
+
+class emp
+{ public static void main(String[] args)
+   {
+    Scanner input=new Scanner(System.in);
+     int size,i,search_id,search_idp,payres; 
+           System.out.print("enter how many employee details you are going to give : ");
+    size=input.nextInt();
+    employee[]emparray=new employee[size];
+    for(i=0;i<size;i++)
+      {
+       emparray[i]=new employee();
+       assign(emparray,input,i);
+      }
+      System.out.print("enter employee ID to show his payslip : ");
+       search_id=input.nextInt();  
+       System.out.println("PAY SLIP\n----------------------------------------------------- ");
+      payres= payslip(emparray,search_id,size);
+      if(payres!=-1)
+          display(emparray,payres);
+      else
+          System.out.println("that ID is not available  ");
+        System.out.println("\n----------------------------------------------------- ");
+     System.out.print("enter employee ID to show his promotion : "); 
+            search_idp=input.nextInt();
+       
+      promotion(emparray,search_idp,size);        
+      for(i=0;i<size;i++)
+             display(emparray,i); 
+            
+   
+  }
+  static void assign(employee []emparray,Scanner input,int i)
+      {
+        System.out.print("enter name of the employee "+(i+1)+" : ");
+            emparray[i].name=input.next();
+        System.out.print("enter id of "+emparray[i].name+" : ");
+            emparray[i].id=input.nextInt();
+         
+        System.out.print("enter year of experiance of  : ");
+            emparray[i].yoe=input.nextInt();
+        
+         System.out.print("enter lic amount(if you are not opted enter zero) : ");
+            emparray[i].lic=input.nextDouble();
+        System.out.print("enter basic pay of : ");
+            emparray[i].basic_pay=input.nextDouble();
+        System.out.print("enter working hours of : ");       
+            emparray[i].working_hrs=input.nextInt();
+        System.out.print("enter hourly wages of  : "); 
+             emparray[i].hourly_wages=input.nextDouble();
+        System.out.print("1-INTERN\n2-MANAGER\n3-OTHERS(Trainner,Analyst,Software Engineer)\nenter designation  : ");
+            emparray[i].designation=input.nextInt();
+             emparray[i].grosspay();
+              emparray[i].netpay();
+ 
+      
+      }
+  static void display(employee []emparray,int i)
+      {
+             
+         System.out.println("NAME               : "+ emparray[i].name);
+         System.out.println("ID                 : "+ emparray[i].id);
+         System.out.println("YEAR OF EXPERIENCE : "+ emparray[i].yoe);
+         System.out.println("GROSS SALARY       : "+ emparray[i].gross_salary); 
+         System.out.println("NET SALARY         : "+ emparray[i].net_salary);
+          
+       }
+  static int payslip(employee []emparray, int search_id,int size)
+       { int i;
+      
+                     
+     for(i=0;i<size;i++)
+                {if(search_id==emparray[i].id)
+                  return i;
+                }
+            return -1;
+       } 
+   static void promotion(employee []emparray,int search_idp,int size)
+    {
+       int promotionvar,temp,yoetemp;
+       promotionvar=payslip(emparray,search_idp,size);
+        if(promotionvar==-1)
+         System.out.println("oops! this employee id is not available here ");
+        else
+          {
+            temp=emparray[promotionvar].designation;
+            yoetemp=emparray[promotionvar].yoe;
+           if(temp==1)
+             {
+              System.out.println("current status is intern ");
+             if(yoetemp<5)
+               System.out.println(emparray[promotionvar].name +" is not completed at least five years yet so wait for some more years  !!");
+             else if(yoetemp>=5&&yoetemp<15)
+                 System.out.println(emparray[promotionvar].name +" can be promoted to ANALYST (or) SOFTWARE ENGINEER !!");
+             else if(yoetemp>=15&&yoetemp<30)
+                System.out.println(emparray[promotionvar].name +" can be promoted to MANAGER !!");
+             else 
+               System.out.println(emparray[promotionvar].name +" is over experianced so retirement will be the promotion !! ");
+           }
+           else if(temp==2)
+             {
+                System.out.println("current status is OTHERS(analyst,software engineer) ");
+             if(yoetemp<5)
+               System.out.println(emparray[promotionvar].name +" is not completed at least five years yet so wait for some more years  !!");
+             else if(yoetemp>=5&&yoetemp<15)
+                System.out.println(emparray[promotionvar].name +" can be promoted to MANAGER !!");
+              else 
+               System.out.println(emparray[promotionvar].name +" is over experianced so retirement will be the promotion !! ");
+             }
+
+            else if(temp==3)
+             {
+                System.out.println("current status is MANAGER");
+             if(yoetemp<5)
+               System.out.println(emparray[promotionvar].name +" is not completed at least five years yet so wait for some more years  !!");
+             else if(yoetemp>=5&&yoetemp<20)
+                System.out.println(emparray[promotionvar].name +" has only some more years for retirement  !!");
+              else 
+               System.out.println(emparray[promotionvar].name +" is over experianced so retirement will be the promotion !! ");
+             }
+          
+          }
+    }
+}
+
+/*
+SAMPLE I/O :
+aswin@aswin-HP-Pavilion-Laptop-15-cs2xxx:~/Desktop/java/programs/1b$ java emp
+enter how many employee details you are going to give : 1
+enter name of the employee 1 : as
+enter id of as : 12
+enter year of experiance of  : 3
+enter lic amount(if you are not opted enter zero) : 0
+enter basic pay of : 400
+enter working hours of : 3
+enter hourly wages of  : 350
+1-INTERN
+2-MANAGER
+3-OTHERS(Trainner,Analyst,Software Engineer)
+enter designation  : 1
+enter employee ID to show his payslip : 12
+PAY SLIP
+----------------------------------------------------- 
+NAME               : as
+ID                 : 12
+YEAR OF EXPERIENCE : 3
+GROSS SALARY       : 4050.0
+NET SALARY         : 3550.0
+
+----------------------------------------------------- 
+enter employee ID to show his promotion : 12
+current status is intern 
+as is not completed at least five years yet so wait for some more years  !!
+NAME               : as
+ID                 : 12
+YEAR OF EXPERIENCE : 3
+GROSS SALARY       : 4050.0
+NET SALARY         : 3550.0
+
+*/
